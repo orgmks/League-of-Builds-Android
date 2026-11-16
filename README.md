@@ -141,3 +141,42 @@ frontend/src/app/
 Los íconos y fondos de campeones se cargan desde Data Dragon (CDN público de Riot). Si no hay conexión, se muestra la inicial del campeón. La versión usada se configura en `environment.ts`.
 
 *Proyecto de fans, no está respaldado por Riot Games.*
+
+## 4. APK Android con Capacitor
+
+El proyecto incluye una aplicación Android basada en el frontend Angular. El APK
+no contiene el backend ni PostgreSQL: FastAPI debe estar ejecutándose en un
+servidor accesible desde el teléfono.
+
+### Prueba local con un teléfono en la misma Wi-Fi
+
+1. Obtén la IPv4 de tu PC con `ipconfig` (por ejemplo, `192.168.1.25`).
+2. En `frontend/src/environments/environment.ts`, cambia `apiUrl` a
+   `http://192.168.1.25:8000`.
+3. En `backend/.env`, conserva `http://localhost:4200` para el navegador y
+   agrega `https://localhost` para la aplicación Capacitor:
+   `CORS_ORIGINS=http://localhost:4200,https://localhost`.
+4. Inicia FastAPI escuchando en la red local:
+   `uvicorn main:app --host 0.0.0.0 --port 8000`.
+5. Permite el puerto 8000 en el firewall de Windows si el teléfono no puede
+   abrir `http://192.168.1.25:8000/docs`.
+
+En un emulador Android, la PC se alcanza normalmente con
+`http://10.0.2.2:8000` en lugar de `localhost`.
+
+### Compilar y abrir el proyecto Android
+
+Desde la raíz del repositorio:
+
+```bash
+npm run android:sync
+npm run android:open
+```
+
+En Android Studio, espera la sincronización de Gradle y ejecuta la aplicación
+en un emulador o dispositivo USB con depuración habilitada. Para generar un
+APK instalable usa **Build > Build Bundle(s) / APK(s) > Build APK(s)**.
+
+Para publicar, reemplaza `apiUrl` por la URL HTTPS pública del backend y
+configura `CORS_ORIGINS` con el origen que corresponda. Nunca publiques
+credenciales, `.env` ni una base de datos dentro del APK.

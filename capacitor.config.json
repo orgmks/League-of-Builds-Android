@@ -1,0 +1,5 @@
+{
+  "appId": "com.orgmks.lolhub",
+  "appName": "LoL Hub",
+  "webDir": "frontend/dist/frontend/browser"
+}
