@@ -1,5 +1,9 @@
 # LoL Hub
 
+# Developers
+- Maximiliano Olmedo
+- Benjamin Marinzulich
+# 
 Aplicación web full stack temática de League of Legends. Los invocadores se registran, crean **builds** (ítems, runas, dificultad, parche) para cada campeón, las editan, las eliminan y marcan las de otros como favoritas.
 
 - **Frontend:** Angular 22 + Angular Material (carpeta `frontend/`)
