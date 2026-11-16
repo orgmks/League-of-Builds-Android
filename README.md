@@ -184,3 +184,22 @@ APK instalable usa **Build > Build Bundle(s) / APK(s) > Build APK(s)**.
 Para publicar, reemplaza `apiUrl` por la URL HTTPS pública del backend y
 configura `CORS_ORIGINS` con el origen que corresponda. Nunca publiques
 credenciales, `.env` ni una base de datos dentro del APK.
+
+### Build automático del APK en GitHub Actions
+
+El workflow [Build Android APK](.github/workflows/android-apk.yml) se ejecuta
+automáticamente con cada `push` a `main`. También puede iniciarse manualmente
+desde la pestaña **Actions** usando **Run workflow**.
+
+El flujo realiza los siguientes pasos:
+
+1. Instala Node.js 22, Java 17 y las dependencias fijadas en los dos
+   `package-lock.json`.
+2. Genera el build de producción de Angular y sincroniza Capacitor.
+3. Compila el APK Android en modo debug con `assembleDebug`.
+4. Publica `app-debug.apk` como el artefacto `lolhub-debug-apk`.
+
+Para descargarlo, abre la ejecución terminada en **Actions** y selecciona el
+artefacto en la sección **Artifacts**. El APK es de prueba y no está firmado
+para publicación en Google Play. No se debe subir el archivo APK al
+repositorio: se genera de forma reproducible en cada ejecución.
