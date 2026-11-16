@@ -193,7 +193,7 @@ desde la pestaña **Actions** usando **Run workflow**.
 
 El flujo realiza los siguientes pasos:
 
-1. Instala Node.js 22, Java 17 y las dependencias fijadas en los dos
+1. Instala Node.js 22, Java 21 y las dependencias fijadas en los dos
    `package-lock.json`.
 2. Genera el build de producción de Angular y sincroniza Capacitor.
 3. Compila el APK Android en modo debug con `assembleDebug`.
